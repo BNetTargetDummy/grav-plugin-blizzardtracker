@@ -46,9 +46,34 @@ SQL;
         return $result;
     }
 
-    public function getAllPost($page = 0)
+    public function getAllTopic(int $page = 0, $count = null)
     {
+        if(is_null($count)) {
+            $count = self::getGrav()['config']->get('plugins.blizzardtracker.config.postPerPage');
+        }
+        $count = (int) $count;
 
+        $sql = <<<SQL
+SELECT DISTINCT ON (post.id)
+  forum.name       AS forum_name,
+  topic.title      AS topic_title,
+  topic.authorbnet AS topic_author,
+  post.author      AS last_post_author,
+  post.date        AS last_post_date
+FROM post
+  LEFT JOIN topic ON post.idtopic = topic.id
+  LEFT JOIN forum ON topic.idforum = forum.id
+ORDER BY post.id DESC
+LIMIT :limit OFFSET :offset;
+SQL;
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':limit', $count);
+        $stmt->bindValue(':offset', $count * $page);
+        $stmt->execute();
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $result;
     }
 }
 

@@ -19,6 +19,14 @@ form:
       type: tabs
       active: 1
       fields:
+        general:
+          type: tab
+          title: Features
+          fields:
+            config.postPerPage:
+              type: int
+              label: Post Per Page
+              default: 40
         base:
           type: tab
           title: PDO Connection
