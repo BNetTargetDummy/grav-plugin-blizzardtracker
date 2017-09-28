@@ -1,0 +1,45 @@
+name: Blizzard-Tracker
+version: 0.1.0
+description: Display Blizzard Tracker
+icon: plug
+author:
+  name: TargetDummy
+  email: contact@targetdummy.io
+homepage: https://github.com/bnettargetdummy/grav-plugin-blizzard-tracker
+demo: http://demo.yoursite.com
+keywords: grav, plugin, etc
+bugs: https://github.com/bnettargetdummy/grav-plugin-blizzard-tracker/issues
+docs: https://github.com/bnettargetdummy/grav-plugin-blizzard-tracker/blob/develop/README.md
+license: MIT
+
+form:
+  validation: strict
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+      fields:
+        base:
+          type: tab
+          title: PDO Connection
+          fields:
+            pdo.driver:
+              type: text
+              label: Driver
+              default: pgsql
+            pdo.host:
+              type: text
+              label: Host
+              placeholder: localhost
+            pdo.user:
+              type: text
+              label: User
+              placeholder: root
+            pdo.password:
+              type: password
+              label: Password
+              placeholder: Password
+            pdo.database:
+              type: text
+              label: Database
+              placeholder: Database
