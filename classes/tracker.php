@@ -75,12 +75,14 @@ SQL;
 
         return $result;
     }
+
+    public function getTopic(int $idTopic): array
+    {
+        /**
+         * Return array containing:
+         *  - Main information about the topic
+         *  - List of posts
+         */
+        return [];
+    }
 }
-
-
-
-
-
-
-
-
