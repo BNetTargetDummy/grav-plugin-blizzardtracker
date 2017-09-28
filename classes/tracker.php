@@ -24,6 +24,7 @@ class Tracker
 
     public function getLastPost(): array
     {
+        // TODO: Add plugin parameter to limit
         $sql = <<<SQL
 SELECT DISTINCT ON (post.id) topic.title, post.date, forum.name
 FROM post
