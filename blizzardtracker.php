@@ -29,8 +29,7 @@ class BlizzardTrackerPlugin extends Plugin
     }
 
     /**
-     * If the admin path matches, initialize the Login plugin configuration and set the admin
-     * as active.
+     * If the BlizzardTracker path matches, initialize the BlizzardTracker autoload
      */
     public function setup()
     {
