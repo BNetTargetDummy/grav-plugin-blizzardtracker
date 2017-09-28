@@ -4,6 +4,8 @@ namespace Grav\Plugin\BlizzardTracker;
 
 use Grav\Common\GravTrait;
 
+//TODO: Fix BlizzardTracker so that the date is a DateTime in SQL
+
 class Tracker
 {
     use GravTrait;
