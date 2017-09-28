@@ -28,7 +28,12 @@ class Tracker
     {
         // TODO: Add plugin parameter to limit
         $sql = <<<SQL
-SELECT DISTINCT ON (post.id) topic.title, post.date, forum.name
+SELECT DISTINCT ON (post.id)
+  forum.name       AS forum_name,
+  topic.title      AS topic_title,
+  topic.authorbnet AS topic_author,
+  post.author      AS last_post_author,
+  post.date        AS last_post_date
 FROM post
   LEFT JOIN topic ON post.idtopic = topic.id
   LEFT JOIN forum ON topic.idforum = forum.id
