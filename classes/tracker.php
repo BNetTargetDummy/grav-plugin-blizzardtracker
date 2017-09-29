@@ -87,11 +87,47 @@ SQL;
 
     public function getTopic(int $idTopic): array
     {
-        /**
-         * Return array containing:
-         *  - Main information about the topic
-         *  - List of posts
-         */
-        return [];
+        $sql = <<<SQL
+SELECT
+  forum.name       AS forum_name,
+  topic.title      AS title,
+  topic.authorbnet AS author,
+  topic.dateposted AS dateposted,
+  topic.replies    AS number_replies
+FROM topic
+  LEFT JOIN forum ON topic.idforum = forum.id
+WHERE topic.id = :idtopic;
+SQL;
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['idtopic' => $idTopic]);
+        $topic = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        if (empty($topic)) {
+            throw new \Exception('Topic not found');
+        }
+
+        $sql = <<<SQL
+SELECT
+  post.author     AS author,
+  post.date       AS dateposted,
+  post.postnumber AS postnumber,
+  post.content    AS content
+FROM post
+WHERE post.idtopic = :idtopic
+ORDER BY post.id ASC;
+SQL;
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['idtopic' => $idTopic]);
+        $posts = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        if(empty($posts)) {
+            $posts = [];
+        }
+
+        $topic['posts'] = $posts;
+
+        return $topic;
     }
 }
