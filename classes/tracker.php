@@ -25,7 +25,7 @@ class Tracker
         );
     }
 
-    public function getLastPost($limit = null): array
+    public function getLastPosts($limit = null): array
     {
         if (is_null($limit)) {
             $limit = self::getGrav()['config']->get('plugins.blizzardtracker.config.limitMainPage');
