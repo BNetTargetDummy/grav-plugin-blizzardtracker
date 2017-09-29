@@ -23,6 +23,10 @@ form:
           type: tab
           title: Features
           fields:
+            config.limitMainPage:
+              type: int
+              label: Number of posts display
+              default: 5
             config.postPerPage:
               type: int
               label: Post Per Page
